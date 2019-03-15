@@ -1,0 +1,69 @@
+package com.company;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+
+    public static void printTarget(int target, ArrayList<String> tokens)
+    {
+        String output = tokens.get(target);
+        System.out.println(output.toUpperCase());
+    }
+
+    public static void printBefore(int target, ArrayList<String> tokens)
+    {
+        int before = target - 3;
+        try{
+            System.out.print(tokens.get(before));
+        }
+        catch(IndexOutOfBoundsException ex){
+            return;
+        }
+
+    }
+
+    public static void printAfter(int target, ArrayList<String> tokens)
+    {
+        for(int after = target + 1; after < target + 3; after++){
+            try{
+                System.out.print(tokens.get(after));
+            }
+            catch(IndexOutOfBoundsException ex){
+                return;
+            }
+        }
+    }
+
+    /*public static void alphebetizer(int target, ArrayList<String> tokens)
+    {
+
+    }*/
+
+    public static void main(String[] args)
+    {
+        Scanner in = new Scanner(System.in);
+
+        String input;
+
+        System.out.print("Enter the input for KWIC: ");
+        input = in.nextLine();
+
+        //System.out.print(input);
+
+        ArrayList<String> tokens = new ArrayList<String>(Arrays.asList(input.split(" ")));
+
+        //System.out.print(tokens);
+
+        for(int target = 0; target < tokens.size(); target++){
+            printBefore(target, tokens);
+            printTarget(target, tokens);
+            printAfter(target, tokens);
+            System.out.print("\n");
+        }
+    }
+
+}
