@@ -1,0 +1,90 @@
+// IndexCardTree.cpp
+// Chung-thuy Pham
+
+#include "stdafx.h"
+// Specification file for the IntBinaryTree class
+// Needs to go back and change to TemplatedBinaryTree class
+#ifndef INTBINARYTREE_H
+#define INTBINARYTREE_H
+
+class IntBinaryTree
+{
+private:
+     struct TreeNode
+     {
+          int value;
+          TreeNode *left;
+          TreeNode *right;
+     };
+
+     TreeNode *root;
+
+     void insert(TreeNode *&, TreeNode *&);  // *& pointer being passed by reference
+     void destroySubtree(TreeNode *);
+     void deleteNode(int, TreeNode *&);
+     void makeDeletion(TreeNode *&);
+     void displayInOrder(TreeNode *) const;
+     void displayPreOrder(TreeNode *) const;
+     void displayPostOrder(TreeNode *) const;
+
+//public:
+     // Constructor
+     IntBinaryTree()
+     {
+          root = nullptr;
+     }
+
+     // Destructor
+     ~IntBinaryTree()
+     {
+          destroySubtree(root);
+     }
+
+     //// Binary tree operations
+     void insertNode(int);
+     bool searchNode(int);
+     void removeNode(int);
+     void displayInOrder() const
+     {
+          displayInOrder(root);
+     }
+     void displayPreOrder() const
+     {
+          displayPreOrder(root);
+     }
+     void displayPostOrder() const
+     {
+          displayPostOrder(root);
+     }
+};
+
+#endif
+
+void IntBinaryTree::insertNode(int num)
+{
+     TreeNode *newNode = nullptr;
+
+     // Create a new node and store num in it
+     newNode = new TreeNode;
+     newNode->value = num;
+     newNode->left = newNode->right = nullptr;
+
+     // Insert the node
+     insert(root, newNode);
+}
+
+void IntBinaryTree::insert(TreeNode *&nodePtr, TreeNode *&newNode)
+{
+     if (nodePtr == nullptr)
+          nodePtr = newNode;
+     else if (newNode->value < nodePtr->value)
+          insert(nodePtr->left, newNode); // insert left branch
+     else
+          insert(nodePtr->right, newNode); // insert right branch
+}
+
+int main()
+{
+
+     return 0;
+}
